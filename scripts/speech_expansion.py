@@ -6,11 +6,12 @@ import logging
 import argparse
 import pickle
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
 from pprint import pformat
 import matplotlib.pyplot as plt
 import glob
-import tensorflow as tf
+# import tensorflow as tf
 
 from utils.hparams import HParams
 from models import get_model

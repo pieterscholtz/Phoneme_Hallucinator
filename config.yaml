@@ -1,0 +1,58 @@
+# build_commands:
+# - git clone https://github.com/comfyanonymous/ComfyUI.git
+
+model_name: hallucinator-torchserve
+description: hallucinator-torchserve
+base_image:
+  image: tensorflow/tensorflow:2.8.4-gpu
+  python_executable_path: /usr/bin/python3
+environment_variables: {}
+external_package_dirs: []
+model_metadata:
+  model_id: hallucinator
+  pretty_name: hallucinator-torchserve
+  tags:
+  - vc
+
+model_cache:
+  - repo_id: gs://cambai-ml/deployments/hallucinator_v1/
+#   - repo_id: charactr/vocos-encodec-24khz
+
+runtime:
+    predict_concurrency: 4
+
+python_version: py38
+requirements:
+- pillow==10.3.0
+- torch==2.1.2
+- torchserve==0.10.0
+- tensorflow-probability==0.16.0
+- h5py==3.11.0
+- numpy==1.24.4
+- tqdm==4.66.4
+- easydict==1.13
+- matplotlib==3.3.4
+- scikit-learn==1.3.2
+- scipy==1.10.1
+- safetensors==0.2.4
+- httpx==0.27.0
+- gcsfs==2024.6.1
+- portalocker==2.10.1
+- tenacity==8.5.0
+- protobuf==3.20.3
+# - tensorflow==1.15.5
+# - tensorpack==0.9.8
+# - seaborn==0.11.2
+
+
+resources:
+  accelerator: T4
+  cpu: '4'
+  memory: 16Gi
+  use_gpu: true
+
+system_packages:
+- python3.8-venv
+- default-jre
+# - ffmpeg
+# - libsox-dev

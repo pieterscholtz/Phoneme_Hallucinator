@@ -1,5 +1,6 @@
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
 initializer = tf.compat.v1.random_normal_initializer(stddev=0.001)
 def dense_nn(x, dims, dim_out, norm=True, name='dense_nn'):
     with tf.variable_scope(name, reuse=tf.AUTO_REUSE):

@@ -1,7 +1,10 @@
 import logging
 from pprint import pformat
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
+
+
 class BaseModel(object):
     def __init__(self, hps):
         super(BaseModel, self).__init__()

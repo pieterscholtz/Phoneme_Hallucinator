@@ -3,7 +3,8 @@ import logging
 from collections import defaultdict
 import numpy as np
 import pickle
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
 from pprint import pformat
 
 from .utils import visualize, plot_functions, plot_img_functions

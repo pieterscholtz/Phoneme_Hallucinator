@@ -1,5 +1,7 @@
 import numpy as np
-import tensorflow as tf
+import tensorflow as tf2
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
 
 def layer_norm(x):
     mean = tf.reduce_mean(x, axis=[1,2], keepdims=True)
@@ -33,7 +35,7 @@ def set_transformer(inputs, layer_sizes, name, num_heads=4, num_inds=16):
         out = inputs
         for i, size in enumerate(layer_sizes):
             inds = tf.get_variable(f'inds_{i}', shape=[1,num_inds,size], dtype=tf.float32, trainable=True,
-                                    initializer=tf.contrib.layers.xavier_initializer())
+                                    initializer=tf2.keras.initializers.glorot_normal())
             inds = tf.tile(inds, [tf.shape(out)[0],1,1])
             tmp = set_attention(inds, out, size, num_heads, name=f'self_attn_{i}_pre')
             out = set_attention(out, tmp, size, num_heads, name=f'self_attn_{i}_post')
